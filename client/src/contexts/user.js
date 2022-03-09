@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { SET_USER, apiUrl, config } from "./constants";
+import { SET_USER, SET_AVATAR_USER, apiUrl, config } from "./constants";
 import { userReducer } from "../reducers/user";
 
 export const UserContext = createContext();
@@ -84,6 +84,11 @@ const UserProvider = ({ children }) => {
       );
       console.log(response.data);
       if (response.data.success) {
+        dispatch(
+          { type: SET_AVATAR_USER, payload: response.data.avatar },
+          userState
+        );
+
         return response.data;
       }
     } catch (error) {

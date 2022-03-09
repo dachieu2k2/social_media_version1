@@ -1,0 +1,17 @@
+.navbar{
+    width: 100%;
+    position: fixed;
+    top:0;
+    left: 0%;
+}
+.main__navbar{
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    align-items: center;
+}
+.navbar__item {
+    font-size: 1.3rem;
+    cursor: pointer;
+    
+}

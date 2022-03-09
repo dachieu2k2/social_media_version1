@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user";
 
 const ChangeAvatar = () => {
+  let navigate = useNavigate();
   //Context
   const { userInfo, changeAvatar } = useContext(UserContext);
 
@@ -18,6 +20,9 @@ const ChangeAvatar = () => {
       const formData = new FormData();
       formData.append("avatar", image);
       const response = await changeAvatar(formData);
+      if (response.success) {
+        navigate("/");
+      }
       console.log(response);
     } catch (error) {
       console.log(error.message);
@@ -26,9 +31,9 @@ const ChangeAvatar = () => {
   return (
     <div>
       {image ? (
-        <img src={URL.createObjectURL(image)} />
+        <img src={URL.createObjectURL(image)} alt="image" />
       ) : (
-        <img src={userInfo?.avatar} />
+        <img src={userInfo?.avatar} alt="image" />
       )}
 
       <input type="file" onChange={onChangeFile} />
