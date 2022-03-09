@@ -1,4 +1,4 @@
 server/node_modules
-/server/request.http
-/server/.env
+server/request.http
+server/.env
 client/node_modules
