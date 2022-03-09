@@ -1,7 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user";
 
 const Register = () => {
+  //usenavigate
+  let navigate = useNavigate();
+  //usercontext
+  const { register } = useContext(UserContext);
+  //register state
   const [registerForm, setRegisterForm] = useState({
     username: "",
     password: "",
@@ -12,12 +18,21 @@ const Register = () => {
   const onChangeRegisterForm = (e) => {
     setRegisterForm({ ...registerForm, [e.target.name]: e.target.value });
   };
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    if (username !== "" && password !== "") {
-      //   setRegisterForm({ username: "", password: "",email:'', });
-      console.log(registerForm);
-    }
+    if (confirmPassword === password)
+      try {
+        if (username !== "" && password !== "") {
+          //   setRegisterForm({ username: "", password: "",email:'', })
+          const response = await register({ password, username, email });
+          console.log(response);
+          if (response.success) {
+            navigate("/changeAvatar");
+          }
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
   };
   return (
     <form onSubmit={submitForm}>
@@ -45,7 +60,7 @@ const Register = () => {
         placeholder="Enter your confirm..."
       />
       <input
-        type="password"
+        type="text"
         name="email"
         value={email}
         onChange={onChangeRegisterForm}

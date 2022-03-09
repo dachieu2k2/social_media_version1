@@ -2,7 +2,11 @@ const express = require("express");
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 const verifyToken = require("../middleware/verifyToken");
+const multer = require("multer");
+
+const upload = multer({ dest: "./uploads" });
 
 const router = express.Router();
 
@@ -18,12 +22,11 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 router.post("/register", async (req, res) => {
+  const { email, username, password } = req.body;
+  if (!email || !username || !password) {
+    res.json({ success: false, message: "please fill in the fields!" });
+  }
   try {
-    const { email, username, password } = req.body;
-    if (!email || !username || !password) {
-      res.json({ success: false, message: "please fill in the fields!" });
-    }
-
     const foundUser = await User.findOne({ username });
     if (foundUser) {
       res.status(400).json({ success: false, message: "choose another name" });
@@ -76,11 +79,11 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    res.json({ success: false, message: "please fill in the fields!" });
+  }
   try {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      res.json({ success: false, message: "please fill in the fields!" });
-    }
     const foundUser = await User.findOne({ username });
     if (!foundUser) {
       res
@@ -102,6 +105,25 @@ router.post("/login", async (req, res) => {
     res
       .status(200)
       .json({ success: true, accessToken, message: "Login success!" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "server error!" });
+  }
+});
+
+//change avatar
+router.patch("/:id", verifyToken, upload.single("avatar"), async (req, res) => {
+  const id = req.params.id;
+  try {
+    const fileType = req.file.mimetype.split("/")[1];
+    const newFileName = req.file.filename + "." + fileType;
+    fs.renameSync(`./uploads/${req.file.filename}`, `./uploads/${newFileName}`);
+
+    const userNeedUpdate = await User.findById(id);
+    userNeedUpdate.avatar = "http://localhost:4000" + "/static/" + newFileName; //deploy fix port
+
+    await userNeedUpdate.save();
+    res.status(200).json({ success: true, message: "upload success!" });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: "server error!" });
