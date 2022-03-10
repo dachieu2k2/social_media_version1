@@ -1,8 +1,10 @@
 .list_blog {
     display: flex;
     justify-content: center;
-    width: 100%;
+    max-width: 50%;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 10px;
+    flex: 0 0 50%;
+
 }

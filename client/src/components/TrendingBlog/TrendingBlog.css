@@ -1,0 +1,19 @@
+.trending__blog{
+    flex:0 0 30%;
+    max-width: 30%;
+    margin-top: 30px;
+    padding: 10px 40px;
+    width: 100%;
+}
+.trending__blog-container{
+    border-radius: 10px;
+    
+    border: 5px solid pink;
+}
+.trending__blog-list {
+    width: 100%;
+}
+.blog__item_typo{
+    padding: 10px 10px;
+    font-size: 1.4rem;
+}

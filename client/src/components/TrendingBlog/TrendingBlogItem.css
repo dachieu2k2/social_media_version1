@@ -1,0 +1,13 @@
+.blog__item-container{
+    padding: 10px 10px;
+}
+
+.blog__item-title{
+    font-size: 1.2rem;
+    text-decoration: underline pink 3px;
+    color: rgb(248, 59, 90);
+    cursor: pointer;
+}
+.blog__item-amount{
+    padding: 4px 10px;
+}

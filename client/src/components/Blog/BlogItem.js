@@ -1,5 +1,6 @@
 import React from "react";
 import "./BlogItem.css";
+import { GoHeart, GoComment } from "react-icons/go";
 
 const BlogItem = ({ title, description, image, user }) => {
   return (
@@ -13,8 +14,12 @@ const BlogItem = ({ title, description, image, user }) => {
         <img className="blog__body-image" src={image} alt="notTHing" />
       </div>
       <div className="blog__footer">
-        <div className="blog__footer-like">Like</div>
-        <div className="blog__footer-like">Comment</div>
+        <div className="blog__footer-like">
+          <GoHeart className="blog__footer-like-icon" />
+        </div>
+        <div className="blog__footer-like">
+          <GoComment className="blog__footer-like-icon" />
+        </div>
       </div>
     </div>
   );

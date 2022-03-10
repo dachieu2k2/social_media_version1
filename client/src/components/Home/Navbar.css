@@ -1,17 +1,34 @@
 .navbar{
-    width: 100%;
-    position: fixed;
+    flex:0 0 20%;
+    max-width: 20%;
+    position: relative;
+    /* position: fixed;
     top:0;
-    left: 0%;
+    left: 0%; */
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 40px;
 }
 .main__navbar{
-    display: flex;
-    justify-content: space-around;
+    position: fixed;
     height: 50px;
-    align-items: center;
+
 }
 .navbar__item {
-    font-size: 1.3rem;
+    font-size: 2rem;
     cursor: pointer;
-    
+    padding: 10px 24px;
+}
+.navbar__item.active{
+    border-right: 5px solid rgb(245,122,143);
+
+}
+.nav__item-color{
+    font-size: 2rem;
+    fill:rgb(245, 122, 143);
+}
+.navbar__item.active .navbar__item-icon .nav__item-color{
+    font-size: 2.2rem;
+    fill:rgb(247, 101, 125);
 }
