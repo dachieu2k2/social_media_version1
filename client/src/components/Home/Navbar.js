@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import {
   GoHome,
@@ -7,8 +7,13 @@ import {
   GoPerson,
   GoPencil,
 } from "react-icons/go";
+import WriteBlog from "../Modals/WriteBlog";
 
 const Navbar = () => {
+  const [show, setShow] = useState(false);
+  const handleClickShow = () => {
+    setShow(!show);
+  };
   return (
     <div className="navbar">
       <ul className="main__navbar">
@@ -19,7 +24,9 @@ const Navbar = () => {
         </li>
         <li className="navbar__item">
           <span className="navbar__item-icon">
-            <GoPencil className="nav__item-color" />
+            <span className="nav__item-button" onClick={handleClickShow}>
+              <GoPencil className="nav__item-color" />
+            </span>
           </span>
         </li>
         <li className="navbar__item">
@@ -38,6 +45,7 @@ const Navbar = () => {
           </span>
         </li>
       </ul>
+      <WriteBlog show={show} handleClickShow={handleClickShow} />
     </div>
   );
 };
