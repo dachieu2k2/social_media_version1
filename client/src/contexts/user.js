@@ -15,7 +15,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (userState.userInfo) {
-      navigate("/");
+      navigate("/home");
     } else {
       navigate("/login");
     }

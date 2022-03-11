@@ -1,6 +1,7 @@
 import React from "react";
 import "./Blog.css";
 import BlogItem from "./BlogItem";
+import TrendingBlog from "../TrendingBlog/TrendingBlog";
 
 const fakeblog = [
   {
@@ -28,19 +29,22 @@ const fakeblog = [
 
 const Blog = () => {
   return (
-    <ul className="list_blog">
-      {fakeblog.map((blog, index) => {
-        return (
-          <BlogItem
-            key={index}
-            image={blog.image}
-            description={blog.description}
-            title={blog.title}
-            user={blog.user}
-          />
-        );
-      })}
-    </ul>
+    <>
+      <ul className="list_blog">
+        {fakeblog.map((blog, index) => {
+          return (
+            <BlogItem
+              key={index}
+              image={blog.image}
+              description={blog.description}
+              title={blog.title}
+              user={blog.user}
+            />
+          );
+        })}
+      </ul>
+      <TrendingBlog />
+    </>
   );
 };
 
