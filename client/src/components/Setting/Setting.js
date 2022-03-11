@@ -25,12 +25,27 @@ const Setting = () => {
         </div>
         <div className="setting__control">
           <div className="setting__control-label">username</div>
-          <input type="text" className="setting__control-input" />
+          <input type="text" className="write__blog-input setting-change" />
+          <span
+            className="write__blog-button-save"
+            style={{ marginTop: "20px" }}
+          >
+            Edit
+          </span>
         </div>
-        <div className="setting__control">
+        <div className="setting__control" style={{ marginBottom: "20px" }}>
           <div className="setting__control-label">your email</div>
-          <input type="text" className="setting__control-input" />
+          <input type="text" className="write__blog-input setting-change" />
+          <span
+            className="write__blog-button-save"
+            style={{ marginTop: "20px" }}
+          >
+            Edit
+          </span>
         </div>
+        <span className="write__blog-button-save" style={{ marginTop: "20px" }}>
+          Save
+        </span>
       </div>
     </div>
   );

@@ -28,3 +28,6 @@
 .setting__control {
     padding: 10px 10px;
 }
+.setting__control .write__blog-input.setting-change{
+    width: 90%;
+}

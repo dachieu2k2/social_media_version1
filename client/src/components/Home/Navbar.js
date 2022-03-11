@@ -29,7 +29,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link to="/">
+          <Link to="/home">
             <span className="navbar__item-icon">
               <span className="nav__item-button" onClick={handleClickShow}>
                 <GoPencil className="nav__item-color" />
