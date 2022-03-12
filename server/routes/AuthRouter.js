@@ -123,13 +123,11 @@ router.patch("/:id", verifyToken, upload.single("avatar"), async (req, res) => {
     userNeedUpdate.avatar = "http://localhost:4000" + "/static/" + newFileName; //deploy fix port
 
     await userNeedUpdate.save();
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "upload success!",
-        avatar: "http://localhost:4000" + "/static/" + newFileName,
-      });
+    res.status(200).json({
+      success: true,
+      message: "upload success!",
+      avatar: "http://localhost:4000" + "/static/" + newFileName,
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: "server error!" });

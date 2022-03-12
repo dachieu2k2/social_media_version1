@@ -1,8 +1,8 @@
 import React from "react";
-import "./BlogItem.css";
+import "./MyBlogItem.css";
 import { GoHeart, GoComment } from "react-icons/go";
 
-const BlogItem = ({ title, description, image, user }) => {
+const MyBlogItem = ({ title, description, image, user }) => {
   return (
     <div className="item__blog__container">
       <div className="blog__title">
@@ -33,4 +33,4 @@ const BlogItem = ({ title, description, image, user }) => {
   );
 };
 
-export default BlogItem;
+export default MyBlogItem;

@@ -7,8 +7,8 @@ import Login from "./components/Auth/Login";
 import UserProvider from "./contexts/user";
 import ChangeAvatar from "./components/Auth/ChangeAvatar";
 import Setting from "./components/Setting/Setting";
-import Navbar from "./components/Home/Navbar";
 import Blog from "./components/Blog/Blog";
+import MyBlog from "./components/MyBlog/MyBlog";
 
 const App = () => {
   return (
@@ -16,9 +16,10 @@ const App = () => {
       <UserProvider>
         <Routes>
           <Route path="/" element={<Home />}>
-            <Route path="home" element={<Blog />} />
+            <Route path="my_blog" element={<MyBlog />} />
 
-            <Route path="/setting" element={<Setting />} />
+            <Route path="home" element={<Blog />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
 
           <Route path="/register" element={<Register />}></Route>
