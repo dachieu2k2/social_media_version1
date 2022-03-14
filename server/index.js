@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const AuthRouter = require("./routes/AuthRouter.js");
+const PostRouter = require("./routes/PostRouter");
 
 const connectDB = async () => {
   try {
@@ -28,7 +29,26 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", AuthRouter);
+app.use("/api/post", PostRouter);
 
 const PORT = 4000 || process.env.PORT;
 
-app.listen(PORT, console.log(`App start on port ${PORT}`));
+const server = app.listen(PORT, console.log(`App start on port ${PORT}`));
+
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("connected to socket.io", socket.id);
+  socket.on("global_post", (data) => {
+    console.log("global_post");
+    socket.emit("receive_global_post", data);
+  });
+  socket.on("disconnect", () => {
+    console.log("socket disconnect");
+  });
+});

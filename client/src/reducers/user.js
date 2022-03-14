@@ -4,10 +4,14 @@ export const userReducer = (state, action) => {
   const { payload, type } = action;
   switch (type) {
     case SET_USER:
-      return { ...state, userInfo: payload };
+      return { ...state, userInfo: payload, isLoading: false };
 
     case SET_AVATAR_USER:
-      return { ...state, userInfo: { ...state.userInfo, avatar: payload } };
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, avatar: payload },
+        isLoading: false,
+      };
     default:
       throw new Error("Action not found!");
   }

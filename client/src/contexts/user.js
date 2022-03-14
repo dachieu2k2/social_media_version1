@@ -9,11 +9,13 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   let navigate = useNavigate();
   const [userState, dispatch] = useReducer(userReducer, {
-    isLoading: false,
+    isLoading: true,
     userInfo: null,
   });
 
   useEffect(() => {
+    // console.log(userState.userInfo);
+
     if (userState.userInfo) {
       navigate("/home");
     } else {
@@ -22,14 +24,22 @@ const UserProvider = ({ children }) => {
   }, [userState.userInfo]);
 
   useEffect(() => getUser(), []);
+
   const getUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     try {
       const response = await axios.get(`${apiUrl}/users`, config());
-      console.log(response.data);
       if (response.data.success) {
         dispatch({ type: SET_USER, payload: response.data.info }, userState);
+      } else {
+        localStorage.removeItem("accessToken");
       }
     } catch (error) {
+      localStorage.removeItem("accessToken");
+
       if (error.response.data) {
         console.log(error.response.data);
       }
@@ -43,6 +53,7 @@ const UserProvider = ({ children }) => {
       console.log(response.data);
       if (response.data.success) {
         localStorage.setItem("accessToken", response.data.accessToken);
+        await getUser();
         return response.data;
       }
     } catch (error) {
@@ -60,6 +71,8 @@ const UserProvider = ({ children }) => {
       console.log(response.data);
       if (response.data.success) {
         localStorage.setItem("accessToken", response.data.accessToken);
+        await getUser();
+
         return response.data;
       }
     } catch (error) {
@@ -98,11 +111,23 @@ const UserProvider = ({ children }) => {
       console.log({ success: false, message: error.message });
     }
   };
+  const logout = async () => {
+    try {
+      localStorage.removeItem("accessToken");
+    } catch (error) {
+      if (error.response.data) {
+        console.log(error.response.data);
+      }
+      console.log({ success: false, message: error.message });
+    }
+  };
   const userContextData = {
     userInfo: userState.userInfo,
     login,
     register,
     changeAvatar,
+    logout,
+    isLoading: userState.isLoading,
   };
   return (
     <UserContext.Provider value={userContextData}>

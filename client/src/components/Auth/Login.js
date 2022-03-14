@@ -21,7 +21,6 @@ const Login = () => {
       if (username !== "" && password !== "") {
         const response = await login(loginForm);
         setLoginForm({ username: "", password: "" });
-        console.log(loginForm);
       }
     } catch (error) {
       console.log(error.message);

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Blog.css";
 import BlogItem from "./BlogItem";
 import TrendingBlog from "../TrendingBlog/TrendingBlog";
+import { UserContext } from "../../contexts/user";
+import Loading from "../Loading/Loading";
 
 const fakeblog = [
   {
@@ -46,24 +48,31 @@ const fakeblog = [
 ];
 
 const Blog = () => {
-  return (
-    <>
-      <ul className="list_blog">
-        {fakeblog.map((blog, index) => {
-          return (
-            <BlogItem
-              key={index}
-              image={blog.image}
-              description={blog.description}
-              title={blog.title}
-              user={blog.user}
-            />
-          );
-        })}
-      </ul>
-      <TrendingBlog />
-    </>
-  );
+  const { isLoading } = useContext(UserContext);
+  let body;
+  if (isLoading) {
+    body = <Loading />;
+  } else {
+    body = (
+      <>
+        <ul className="list_blog">
+          {fakeblog.map((blog, index) => {
+            return (
+              <BlogItem
+                key={index}
+                image={blog.image}
+                description={blog.description}
+                title={blog.title}
+                user={blog.user}
+              />
+            );
+          })}
+        </ul>
+        <TrendingBlog />
+      </>
+    );
+  }
+  return body;
 };
 
 export default Blog;
