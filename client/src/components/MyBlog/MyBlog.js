@@ -3,6 +3,7 @@ import TrendingBlog from "../TrendingBlog/TrendingBlog";
 import MyBlogItem from "./MyBlogItem";
 // import "./MyBlog.css";
 import { UserContext } from "../../contexts/user";
+import { PostContext } from "../../contexts/post";
 
 const fakeblog = [
   {
@@ -46,7 +47,9 @@ const fakeblog = [
   },
 ];
 const MyBlog = () => {
-  //user contex
+  //post context
+  const { posts } = useContext(PostContext);
+  //user context
   const { userInfo } = useContext(UserContext);
   return (
     <>

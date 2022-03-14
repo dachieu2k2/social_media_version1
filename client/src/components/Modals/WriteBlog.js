@@ -12,7 +12,7 @@ const WriteBlog = ({ show, handleClickShow }) => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const onChangeFile = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setImage(e.target.files[0]);
   };
 
@@ -29,7 +29,7 @@ const WriteBlog = ({ show, handleClickShow }) => {
       const formData = new FormData();
       formData.append("post", image);
       formData.append("document", blob);
-      console.log(formData);
+      // console.log(formData);
       const response = await createPost(formData);
 
       // if (response.success) {

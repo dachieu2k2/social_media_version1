@@ -12,3 +12,4 @@ export const SET_USER = "SET_USER";
 export const SET_AVATAR_USER = "SET_AVATAR_USER";
 
 export const SET_POST = "SET_POST";
+export const ADD_POST = "ADD_POST";

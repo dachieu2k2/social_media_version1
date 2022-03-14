@@ -64,7 +64,7 @@ router.get("/", verifyToken, async (req, res) => {
 
     res
       .status(200)
-      .json({ success: true, message: "create post success!", posts });
+      .json({ success: true, message: "get post success!", posts });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: "Server error!" });
