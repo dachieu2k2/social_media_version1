@@ -15,7 +15,7 @@ const fakeblog = [
       _id: "622856796ce4f546f38f6784",
       username: "c",
       avatar:
-        "http://localhost:4000/static/0c049f22d1ee2f07b2d91233c43cd8a8.jpeg",
+        "https://bloggioitre.net/wp-content/uploads/2021/06/ngam-gai-xinh-giup-tang-tuoi-tho.jpg",
       __v: 0,
     },
   },
@@ -28,7 +28,7 @@ const fakeblog = [
       _id: "622856796ce4f546f38f6782",
       username: "Hehe",
       avatar:
-        "http://localhost:4000/static/0c049f22d1ee2f07b2d91233c43cd8a8.jpeg",
+        "https://bloggioitre.net/wp-content/uploads/2021/06/ngam-gai-xinh-giup-tang-tuoi-tho.jpg",
       __v: 0,
     },
   },

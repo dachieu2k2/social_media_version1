@@ -42,6 +42,7 @@ router.post(
       });
 
       await newPost.save();
+      await newPost.populate("user", ["username", "avatar", "email", "_id"]);
       //   const userInfo = await User.findById(req.userId).select("-password");
 
       res
@@ -53,5 +54,21 @@ router.post(
     }
   }
 );
+
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const posts = await Post.find({})
+      .sort({ createdAt: -1 })
+      .limit(20)
+      .populate("user", ["username", "avatar", "email", "_id"]);
+
+    res
+      .status(200)
+      .json({ success: true, message: "create post success!", posts });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "Server error!" });
+  }
+});
 
 module.exports = router;

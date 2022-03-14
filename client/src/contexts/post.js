@@ -36,7 +36,7 @@ const PostContextProvider = ({ children }) => {
       if (response.data.success) {
         socket.emit("global_post", {
           type: SET_POST,
-          payload: response.data.post,
+          payload: response.data.newPost,
         });
       }
     } catch (error) {
