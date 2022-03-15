@@ -16,7 +16,6 @@ const PostContextProvider = ({ children }) => {
   useEffect(() => {
     socket = io(PORT);
     // console.log(socket);
-    socket.emit("connection");
   }, []);
   useEffect(() => {
     socket.on("receive_global_post", (data) => {

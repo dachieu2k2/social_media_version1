@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
   console.log("connected to socket.io", socket.id);
   socket.on("global_post", (data) => {
     console.log("global_post");
-    io.broadcast.emit("receive_global_post", data);
+    io.sockets.emit("receive_global_post", data);
   });
   socket.on("disconnect", () => {
     console.log("socket disconnect");
