@@ -1,14 +1,19 @@
-import React, { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { postReducer } from "../reducers/post";
 import axios from "axios";
 import io from "socket.io-client";
 import { apiUrl, SET_POST, ADD_POST, config } from "./constants";
+import { UserContext } from "./user";
 
 let socket;
 const PORT = "http://localhost:4000/";
 export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
+  //user Context
+  const { userInfo } = useContext(UserContext);
+  //postContext
+
   const [postState, dispatch] = useReducer(postReducer, {
     isLoadingPost: true,
     posts: [],
@@ -23,7 +28,11 @@ const PostContextProvider = ({ children }) => {
       console.log("tai sao m chay 2lan");
     });
   }, []);
-  useEffect(() => getPost(), []);
+  useEffect(() => {
+    if (userInfo) {
+      getPost();
+    }
+  }, [userInfo]);
 
   const createPost = async (data) => {
     try {

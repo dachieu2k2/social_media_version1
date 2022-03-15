@@ -2,9 +2,13 @@ import React, { useContext } from "react";
 import { UserContext } from "../../contexts/user";
 import "./Setting.css";
 import { Link } from "react-router-dom";
+import { GoSignOut } from "react-icons/go";
 
 const Setting = () => {
-  const { userInfo } = useContext(UserContext);
+  const { userInfo, logout } = useContext(UserContext);
+  const handleLogout = async () => {
+    await logout();
+  };
   return (
     <div className="setting">
       <div className="setting__container">
@@ -45,6 +49,17 @@ const Setting = () => {
         </div>
         <span className="write__blog-button-save" style={{ marginTop: "20px" }}>
           Save
+        </span>
+        <span
+          className="write__blog-button-save"
+          style={{ marginTop: "20px" }}
+          onClick={handleLogout}
+        >
+          <GoSignOut
+            className="write__blog-button-color"
+            style={{ fill: "white" }}
+          />
+          Logout
         </span>
       </div>
     </div>

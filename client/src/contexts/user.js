@@ -113,7 +113,8 @@ const UserProvider = ({ children }) => {
   };
   const logout = async () => {
     try {
-      localStorage.removeItem("accessToken");
+      localStorage.clear();
+      await getUser();
     } catch (error) {
       if (error.response.data) {
         console.log(error.response.data);
