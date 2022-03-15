@@ -48,10 +48,17 @@ const PostContextProvider = ({ children }) => {
     try {
       const response = await axios.get(`${apiUrl}/post`, config());
       if (response.data.success) {
-        socket.emit("global_post", {
-          type: SET_POST,
-          payload: response.data.posts,
-        });
+        dispatch(
+          {
+            type: SET_POST,
+            payload: response.data.posts,
+          },
+          postState
+        );
+        // socket.emit("global_post", {
+        //   type: SET_POST,
+        //   payload: response.data.posts,
+        // });
       }
     } catch (error) {
       console.log(error.message);

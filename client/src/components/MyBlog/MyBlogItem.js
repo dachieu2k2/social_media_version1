@@ -1,8 +1,9 @@
 import React from "react";
 import "./MyBlogItem.css";
 import { GoHeart, GoComment } from "react-icons/go";
+import moment from "moment";
 
-const MyBlogItem = ({ title, description, image, user }) => {
+const MyBlogItem = ({ title, description, image, user, createdAt }) => {
   return (
     <div className="item__blog__container">
       <div className="blog__title">
@@ -12,7 +13,12 @@ const MyBlogItem = ({ title, description, image, user }) => {
             src={user.avatar}
             alt="avatarhere"
           />
-          <h4 className="blog__title-name">{user.username}</h4>
+          <div className="blog__title-container-name">
+            <h4 className="blog__title-name">{user.username}</h4>
+            <p className="blog__title-moment">
+              {moment(createdAt).startOf("second").fromNow()}
+            </p>
+          </div>
         </div>
 
         <h5>{title}</h5>

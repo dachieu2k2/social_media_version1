@@ -43,7 +43,10 @@
     cursor: pointer;
 
 }
+.blog__title-container-name{
+    margin-left: 20px;
+}
 .blog__title-name {
     font-size: 1.2rem;
-    margin-left: 20px;
+    
 }
