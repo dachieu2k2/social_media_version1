@@ -31,7 +31,7 @@ router.post(
         }
       );
       //   const data = ${req.files["document"][0]
-      console.log(data);
+      // console.log(data);
       const json = JSON.parse(data);
       const { title, description } = json;
       const newPost = new Post({

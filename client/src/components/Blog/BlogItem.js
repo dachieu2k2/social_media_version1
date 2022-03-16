@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./BlogItem.css";
 import { GoHeart, GoComment } from "react-icons/go";
 import moment from "moment";
 
 const BlogItem = ({ title, description, image, user, createdAt }) => {
+  const [seeMore, setSeeMore] = useState(true);
   return (
     <div className="item__blog__container">
       <div className="blog__title">
@@ -22,7 +23,20 @@ const BlogItem = ({ title, description, image, user, createdAt }) => {
         </div>
 
         <h5>{title}</h5>
-        <p>{description}</p>
+        {description.length <= 200 ? (
+          <p>{description}</p>
+        ) : (
+          <>
+            <p>
+              {seeMore
+                ? `${description.substring(0, 200)}...`
+                : `${description}`}
+            </p>
+            <span onClick={() => setSeeMore(!seeMore)}>
+              {seeMore ? "See more" : "See less"}
+            </span>
+          </>
+        )}
       </div>
       <div className="blog__body">
         <img className="blog__body-image" src={image} alt="notTHing" />

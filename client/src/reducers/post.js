@@ -15,7 +15,7 @@ export const postReducer = (state, action) => {
         posts: payload,
       };
     case ADD_POST:
-      console.log(state.posts, payload);
+      // console.log(state.posts, payload);
       const newPosts = [...state.posts, payload].sort(function (x, y) {
         if (x.createdAt < y.createdAt) {
           return 1;
@@ -26,7 +26,7 @@ export const postReducer = (state, action) => {
 
         return 0;
       });
-      console.log(newPosts);
+      // console.log(newPosts);
 
       return {
         ...state,

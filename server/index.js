@@ -55,7 +55,7 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("connected to socket.io", socket.id);
   socket.on("global_post", (data) => {
-    console.log("global_post");
+    // console.log("global_post");
     io.sockets.emit("receive_global_post", data);
   });
   socket.on("disconnect", () => {

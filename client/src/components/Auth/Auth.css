@@ -1,0 +1,33 @@
+.form__auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F4BBBB;
+    background-size: contain;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.form__auth-title {
+    font-size: 4rem;
+    color: #F4FCD9;
+}
+.form__auth-input-control {
+    margin: 10px 10px;
+}
+.form__auth-input {
+    border-radius: 1px;
+    padding: 10px 20px;
+    width: 100%;
+    outline: rgb(250, 114, 137);
+    border-radius: 10px;
+    border: 2px solid pink;
+    box-shadow: rgb(245, 122, 143,1) 0px 6px 12px -2px, rgba(245, 122, 143,1) 0px 3px 7px -3px;
+
+}
+.form__auth-btn {
+    background-color: white;
+    margin: 10px 10px ;
+}

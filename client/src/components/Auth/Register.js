@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user";
+import "./Auth.css";
 
 const Register = () => {
   //usenavigate
@@ -35,41 +36,56 @@ const Register = () => {
       }
   };
   return (
-    <form onSubmit={submitForm}>
-      <h1>Register</h1>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={onChangeRegisterForm}
-        placeholder="Enter your username..."
-      />
-
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={onChangeRegisterForm}
-        placeholder="Enter your password..."
-      />
-      <input
-        type="password"
-        name="confirmPassword"
-        value={confirmPassword}
-        onChange={onChangeRegisterForm}
-        placeholder="Enter your confirm..."
-      />
-      <input
-        type="text"
-        name="email"
-        value={email}
-        onChange={onChangeRegisterForm}
-        placeholder="Enter your email..."
-      />
-      <button type="submit">Register</button>
-      <button>
-        <Link to="/login">Login</Link>
-      </button>
+    <form onSubmit={submitForm} className="form__auth-container">
+      <h1 className="form__auth-title">Register</h1>
+      <div className="form__auth-input-control">
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={onChangeRegisterForm}
+          placeholder="Enter your username..."
+          className="form__auth-input"
+        />
+      </div>
+      <div className="form__auth-input-control">
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={onChangeRegisterForm}
+          placeholder="Enter your password..."
+          className="form__auth-input"
+        />
+      </div>
+      <div className="form__auth-input-control">
+        <input
+          type="password"
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={onChangeRegisterForm}
+          placeholder="Enter your confirm..."
+          className="form__auth-input"
+        />
+      </div>
+      <div className="form__auth-input-control">
+        <input
+          type="text"
+          name="email"
+          value={email}
+          onChange={onChangeRegisterForm}
+          placeholder="Enter your email..."
+          className="form__auth-input"
+        />
+      </div>
+      <div className="form__auth-btn-group">
+        <button type="submit" className="form__auth-btn">
+          Register
+        </button>
+        <button className="form__auth-btn">
+          <Link to="/login">Login</Link>
+        </button>
+      </div>
     </form>
   );
 };
