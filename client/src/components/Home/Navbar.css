@@ -50,3 +50,46 @@
 
     }
 } */
+
+@media (min-width: 1024px) and (max-width: 1239px){
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .navbar{
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        min-width: 100%;
+        background-color: white;
+        bottom: 0;
+    }
+    .main__navbar{
+        display: flex;
+        position: relative;
+
+    }
+    .navbar__item.active{
+        border-top: 5px solid rgb(245,122,143);
+        border-right: transparent;
+    }
+}
+@media (min-width:0px) and (max-width: 740px) {
+    .navbar{
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        min-width: 100%;
+        background-color: white;
+        bottom: 0;
+    }
+    .main__navbar{
+        display: flex;
+        position: relative;
+
+    }
+    .navbar__item.active{
+        border-top: 5px solid rgb(245,122,143);
+        border-right: transparent;
+    }
+}

@@ -3,3 +3,22 @@
     display: flex;
     justify-content: center;
 }
+
+@media (min-width: 1024px) and (max-width: 1239px){
+    .container{
+        width: 984px;
+    }
+    
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .container {
+        width: 644px;
+    }
+}
+@media (min-width:0px) and (max-width: 740px) {
+    .container {
+        width: 100%;
+    }
+}
