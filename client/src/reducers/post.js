@@ -1,13 +1,18 @@
-import { SET_POST, ADD_POST } from "../contexts/constants";
+import { SET_POST, ADD_POST, SET_ALL_USER } from "../contexts/constants";
 
 export const postReducer = (state, action) => {
   const { payload, type } = action;
   switch (type) {
+    case SET_ALL_USER:
+      return {
+        ...state,
+        users: payload,
+        isLoadingPost: false,
+      };
     case SET_POST:
       return {
         ...state,
         posts: payload,
-        isLoadingPost: false,
       };
     case ADD_POST:
       console.log(state.posts, payload);

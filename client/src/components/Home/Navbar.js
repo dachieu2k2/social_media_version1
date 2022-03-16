@@ -28,7 +28,11 @@ const Navbar = () => {
             </span>
           </Link>
         </li>
-        <li className="navbar__item">
+        <li
+          className="navbar__item"
+          value={1}
+          onClick={(e) => console.log(e.target.value)}
+        >
           <Link to="/home">
             <span className="navbar__item-icon">
               <span className="nav__item-button" onClick={handleClickShow}>
@@ -50,9 +54,11 @@ const Navbar = () => {
           </span>
         </li> */}
         <li className="navbar__item">
-          <span className="navbar__item-icon">
-            <GoSearch className="nav__item-color" />
-          </span>
+          <Link to="/search">
+            <span className="navbar__item-icon">
+              <GoSearch className="nav__item-color" />
+            </span>
+          </Link>
         </li>
         <li className="navbar__item">
           <Link to="/setting">

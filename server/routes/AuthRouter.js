@@ -10,6 +10,22 @@ const upload = multer({ dest: "./uploads" });
 
 const router = express.Router();
 
+router.get("/allUser", verifyToken, async (req, res) => {
+  try {
+    const usersDB = await User.find({})
+      .select("-password")
+      .select("-email")
+      .sort({ createdAt: -1 })
+      .limit(20);
+    const users = usersDB.filter((user) => user._id.toString() !== req.userId);
+    console.log(users, req.userId);
+    res.status(200).json({ success: true, users });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 router.get("/", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId)
@@ -21,6 +37,7 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
 router.post("/register", async (req, res) => {
   const { email, username, password } = req.body;
   if (!email || !username || !password) {

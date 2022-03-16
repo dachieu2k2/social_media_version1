@@ -10,6 +10,8 @@ import Setting from "./components/Setting/Setting";
 import Blog from "./components/Blog/Blog";
 import MyBlog from "./components/MyBlog/MyBlog";
 import PostContextProvider from "./contexts/post";
+import Search from "./components/Search/Search";
+import DetailUser from "./components/DetailUser.js/DetailUser";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
 
               <Route path="home" element={<Blog />} />
               <Route path="setting" element={<Setting />} />
+              <Route path="search" element={<Search />} />
+              <Route path=":id" element={<DetailUser />} />
             </Route>
 
             <Route path="/register" element={<Register />}></Route>

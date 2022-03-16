@@ -71,4 +71,20 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
+// router.get("/:id", verifyToken, async (req, res) => {
+//   try {
+//     const posts = await Post.find({ _id: req.params.id })
+//       .sort({ createdAt: -1 })
+//       .limit(20)
+//       .populate("user", ["username", "avatar", "email", "_id"]);
+
+//     res
+//       .status(200)
+//       .json({ success: true, message: "get post success!", posts });
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).json({ success: false, message: "Server error!" });
+//   }
+// });
+
 module.exports = router;

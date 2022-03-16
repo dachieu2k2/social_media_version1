@@ -50,7 +50,7 @@ const UserProvider = ({ children }) => {
   const login = async (data) => {
     try {
       const response = await axios.post(`${apiUrl}/users/login`, data);
-      console.log(response.data);
+
       if (response.data.success) {
         localStorage.setItem("accessToken", response.data.accessToken);
         await getUser();
@@ -68,7 +68,7 @@ const UserProvider = ({ children }) => {
   const register = async (data) => {
     try {
       const response = await axios.post(`${apiUrl}/users/register`, data);
-      console.log(response.data);
+
       if (response.data.success) {
         localStorage.setItem("accessToken", response.data.accessToken);
         await getUser();
@@ -95,7 +95,7 @@ const UserProvider = ({ children }) => {
           },
         }
       );
-      console.log(response.data);
+
       if (response.data.success) {
         dispatch(
           { type: SET_AVATAR_USER, payload: response.data.avatar },
@@ -122,6 +122,7 @@ const UserProvider = ({ children }) => {
       console.log({ success: false, message: error.message });
     }
   };
+
   const userContextData = {
     userInfo: userState.userInfo,
     login,
