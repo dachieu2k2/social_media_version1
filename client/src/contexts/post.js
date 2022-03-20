@@ -6,7 +6,8 @@ import { apiUrl, SET_POST, ADD_POST, config, SET_ALL_USER } from "./constants";
 import { UserContext } from "./user";
 
 let socket;
-const PORT = "http://localhost:4000/";
+// const PORT = "http://localhost:4000/";
+const PORT = "https://project-social-media-app-v1.herokuapp.com/";
 export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
