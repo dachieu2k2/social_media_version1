@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", AuthRouter);
 app.use("/api/post", PostRouter);
 
-const PORT = 4000 || process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 const server = app.listen(PORT, console.log(`App start on port ${PORT}`));
 
