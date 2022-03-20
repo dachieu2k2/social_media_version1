@@ -48,7 +48,7 @@ const server = app.listen(PORT, console.log(`App start on port ${PORT}`));
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: process.env.APISERVER,
+    origin: "*",
   },
   transports: ["websocket"],
 });
