@@ -136,13 +136,13 @@ router.patch("/:id", verifyToken, upload.single("avatar"), async (req, res) => {
     fs.renameSync(`./uploads/${req.file.filename}`, `./uploads/${newFileName}`);
 
     const userNeedUpdate = await User.findById(id);
-    userNeedUpdate.avatar = "http://localhost:4000" + "/static/" + newFileName; //deploy fix port
+    userNeedUpdate.avatar = process.env.API + "/static/" + newFileName; //deploy fix port
 
     await userNeedUpdate.save();
     res.status(200).json({
       success: true,
       message: "upload success!",
-      avatar: "http://localhost:4000" + "/static/" + newFileName,
+      avatar: process.env.API + "/static/" + newFileName,
     });
   } catch (error) {
     console.log(error.message);

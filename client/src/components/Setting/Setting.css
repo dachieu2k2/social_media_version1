@@ -6,7 +6,7 @@
     margin-top: 10px;
     max-width: 80%;
     flex: 0 0 80%;
-    width: 1200px;
+    width: 2000px;
     padding: 10px 10px;
 }
 .setting__container{
@@ -30,4 +30,40 @@
 }
 .setting__control .write__blog-input.setting-change{
     width: 90%;
+}
+@media (min-width: 1024px) and (max-width: 1239px){
+    .setting{
+        width: 100%;
+    }
+    /* .list_blog{
+        max-width: 100%;
+        flex: 0 0 100%;
+    } */
+    /* .trending__blog{
+    } */
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .setting{
+        max-width: 100%;
+        flex: 0 0 100%;
+        width: 644px;
+    }
+    .setting__control .write__blog-input.setting-change{
+        width: 88%;
+    }
+}
+@media (min-width:0px) and (max-width: 740px) {
+    .setting{
+        max-width: 90%;
+        flex: 0 0 90%;
+        width: 644px;
+    }
+    .setting__control {
+        padding: 10px 00px;
+    }
+    .setting__control .write__blog-input.setting-change{
+        width: 78%;
+    }
 }

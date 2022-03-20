@@ -17,6 +17,7 @@ const WriteBlog = ({ show, handleClickShow }) => {
   };
 
   const handleCreatePost = async () => {
+    handleClickShow(!show);
     const obj = {
       title,
       description,

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import TrendingBlog from "../TrendingBlog/TrendingBlog";
-import MyBlogItem from "./MyBlogItem";
+import BlogItem from "../Blog/BlogItem";
+// import MyBlogItem from "./MyBlogItem";
 // import "./MyBlog.css";
 import { UserContext } from "../../contexts/user";
 import { PostContext } from "../../contexts/post";
@@ -58,7 +59,7 @@ const MyBlog = () => {
           .filter((blog) => blog.user._id === userInfo?._id)
           .map((blog, index) => {
             return (
-              <MyBlogItem
+              <BlogItem
                 key={index}
                 image={blog.image}
                 description={blog.description}

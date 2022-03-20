@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { PostContext } from "../../contexts/post";
-import MyBlogItem from "../MyBlog/MyBlogItem";
+import BlogItem from "../Blog/BlogItem";
 import TrendingBlog from "../TrendingBlog/TrendingBlog";
 
 const DetailUser = () => {
@@ -15,7 +15,7 @@ const DetailUser = () => {
           .filter((blog) => blog.user._id === id)
           .map((blog, index) => {
             return (
-              <MyBlogItem
+              <BlogItem
                 key={index}
                 image={blog.image}
                 description={blog.description}

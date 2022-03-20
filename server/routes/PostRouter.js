@@ -37,7 +37,7 @@ router.post(
       const newPost = new Post({
         title,
         description,
-        image: "http://localhost:4000" + "/static/" + newFileName,
+        image: process.env.API + "/static/" + newFileName,
         user: req.userId,
       });
 

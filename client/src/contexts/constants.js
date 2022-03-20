@@ -1,4 +1,7 @@
-export const apiUrl = "http://localhost:4000/api";
+export const apiUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:4000/api"
+    : "somethingelse";
 export const accessToken = localStorage.getItem("accessToken");
 
 export const config = () => {
