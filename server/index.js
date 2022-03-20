@@ -50,6 +50,7 @@ const io = require("socket.io")(server, {
   cors: {
     origin: process.env.APISERVER,
   },
+  transports: ["websocket"],
 });
 
 io.on("connection", (socket) => {
