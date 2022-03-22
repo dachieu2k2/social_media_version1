@@ -15,11 +15,11 @@ const Search = () => {
   return (
     <>
       <ul className="list_search">
-        <div class="write__blog-control">
-          <div class="write__blog-title">Search</div>
+        <div className="write__blog-control">
+          <div className="write__blog-title">Search</div>
           <input
             type="text"
-            class="write__blog-input"
+            className="write__blog-input"
             placeholder="title..."
             name="title"
             value={searchKey}

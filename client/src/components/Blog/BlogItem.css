@@ -22,6 +22,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 50px;
+    border-bottom: 1px solid pink;
 }
 .blog__footer-like-icon{
     font-size: 2rem;
@@ -49,4 +50,31 @@
 } */
 .blog__title-container-name{
     margin-left: 10px;
+}
+
+.see-more-comment{
+    text-align: center;
+    padding: 10px 0px ;
+}
+.blog__footer-listComment{
+    background-color: #fffbf4;
+    padding: 10px 10px;
+}
+
+.blog__footer-createComment{
+    border-top: 1px solid pink;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+}
+.blog__footer-control-input{
+    padding: 0 20px;
+    width: 100%;
+}
+input.blog__footer-wirte {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 13px;
+    outline: none;
+    border: 1px solid pink;
 }

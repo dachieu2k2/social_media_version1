@@ -24,7 +24,7 @@ const App = () => {
 
               <Route path="home" element={<Blog />} />
               <Route path="setting" element={<Setting />} />
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search />}></Route>
               <Route path=":id" element={<DetailUser />} />
             </Route>
 

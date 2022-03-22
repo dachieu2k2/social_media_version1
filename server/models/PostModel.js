@@ -17,6 +17,18 @@ const PostSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "users",
     },
+    likers: {
+      type: [String],
+    },
+    comments: {
+      type: [
+        {
+          commenterId: String,
+          comment: String,
+          createdAt: Number,
+        },
+      ],
+    },
   },
   {
     timestamps: true,

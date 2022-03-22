@@ -39,6 +39,8 @@ router.post(
         description,
         image: process.env.API + "/static/" + newFileName,
         user: req.userId,
+        likers: [],
+        comments: [],
       });
 
       await newPost.save();

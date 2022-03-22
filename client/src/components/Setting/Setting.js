@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../contexts/user";
 import "./Setting.css";
 import { Link } from "react-router-dom";
 import { GoSignOut } from "react-icons/go";
 
 const Setting = () => {
+  // User useContext
   const { userInfo, logout } = useContext(UserContext);
+
+  // state
+  const [seeMoreEmail, setSeeMoreEmail] = useState(false);
   const handleLogout = async () => {
     await logout();
   };
@@ -29,22 +33,23 @@ const Setting = () => {
         </div>
         <div className="setting__control">
           <div className="setting__control-label">username</div>
-          <input type="text" className="write__blog-input setting-change" />
-          <span
-            className="write__blog-button-save"
-            style={{ marginTop: "20px" }}
-          >
-            Edit
-          </span>
+          <span className="setting_user-typo">{userInfo.username}</span>
         </div>
         <div className="setting__control" style={{ marginBottom: "20px" }}>
           <div className="setting__control-label">your email</div>
-          <input type="text" className="write__blog-input setting-change" />
+          <span className="setting_user-typo">
+            {seeMoreEmail
+              ? userInfo.email
+              : userInfo.email
+                  ?.slice(0, 5)
+                  ?.padEnd(userInfo.email?.length, "*")}
+          </span>
           <span
-            className="write__blog-button-save"
-            style={{ marginTop: "20px" }}
+            className="setting_user-typo-seeall"
+            style={{ padding: "10px 10px", cursor: "pointer" }}
+            onClick={() => setSeeMoreEmail(!seeMoreEmail)}
           >
-            Edit
+            {seeMoreEmail ? "Hide" : "See"}
           </span>
         </div>
         <span className="write__blog-button-save" style={{ marginTop: "20px" }}>
