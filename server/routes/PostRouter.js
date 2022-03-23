@@ -62,7 +62,7 @@ router.get("/", verifyToken, async (req, res) => {
     const posts = await Post.find({})
       .sort({ createdAt: -1 })
       .limit(20)
-      .populate("user", ["username", "avatar", "email", "_id"]); 
+      .populate("user", ["username", "avatar", "email", "_id"]);
 
     res
       .status(200)
@@ -88,5 +88,27 @@ router.get("/", verifyToken, async (req, res) => {
 //     res.status(500).json({ success: false, message: "Server error!" });
 //   }
 // });
+
+router.post("/:postId/", verifyToken, async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const { comment } = req.body;
+    const commenterId = req.userId;
+    const newComment = { comment, commenterId };
+    await Post.findByIdAndUpdate(postId, {
+      $push: { comments: newComment },
+    });
+    const user = await User.findById(commenterId).select("username avatar");
+    res.json({
+      success: true,
+      comment: { ...newComment, user },
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      comment: null,
+    });
+  }
+});
 
 module.exports = router;

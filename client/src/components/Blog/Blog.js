@@ -96,7 +96,7 @@ const Blog = () => {
     body = (
       <>
         <ul className="list_blog">
-          {fakeblog.map((blog, index) => {
+          {posts.map((blog, index) => {
             return (
               <BlogItem
                 key={index}
@@ -107,6 +107,7 @@ const Blog = () => {
                 createdAt={blog.createdAt}
                 comments={blog.comments}
                 likers={blog.likers}
+                blogId={blog._id}
               />
             );
           })}

@@ -11,7 +11,7 @@ const Comment = ({ comment, commenter, createdAt }) => {
         <div className="blog__title-personal">
           <img
             className="blog__title-avatar"
-            src={commenter.avatar}
+            src={commenter?.avatar}
             alt="avatarhere"
           />
           <div className="blog__title-container-name">

@@ -5,6 +5,7 @@ import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
 import moment from "moment";
 import Comment from "./Comment";
 import { UserContext } from "../../contexts/user";
+import { PostContext } from "../../contexts/post";
 
 const BlogItem = ({
   title,
@@ -14,13 +15,26 @@ const BlogItem = ({
   createdAt,
   likers,
   comments,
+  blogId
 }) => {
   //Context user
   const { userInfo } = useContext(UserContext);
+  const { createComment } = useContext(PostContext);
 
   //state
   const [seeMore, setSeeMore] = useState(true);
   const [seeMoreComment, setSeeMoreComment] = useState(2);
+  const [commentValue, setCommentValue] = useState('');
+
+  const handleCreateComment = async () => {
+    if (commentValue) {
+      await createComment({
+        comment: commentValue,
+      }, blogId);
+      setCommentValue('');
+    }
+  }
+
   return (
     <div className="item__blog__container">
       <div className="blog__title">
@@ -101,10 +115,13 @@ const BlogItem = ({
           <input
             className="blog__footer-wirte"
             placeholder="write a comment..."
+            value={commentValue}
+            onChange={(e) => setCommentValue(e.target.value)}
+            onKeyUp={(e) => e.keyCode === 13 && handleCreateComment() }
           />
         </div>
         <span>
-          <AiOutlineSend className="blog__footer-like-icon" />
+          <AiOutlineSend className="blog__footer-like-icon" onClick={handleCreateComment} />
         </span>
       </div>
     </div>
