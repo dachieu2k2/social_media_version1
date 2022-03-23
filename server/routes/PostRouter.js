@@ -62,7 +62,7 @@ router.get("/", verifyToken, async (req, res) => {
     const posts = await Post.find({})
       .sort({ createdAt: -1 })
       .limit(20)
-      .populate("user", ["username", "avatar", "email", "_id"]);
+      .populate("user", ["username", "avatar", "email", "_id"]); 
 
     res
       .status(200)

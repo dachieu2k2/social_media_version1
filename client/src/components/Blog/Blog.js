@@ -16,7 +16,6 @@ const fakeblog = [
       username: "c",
       avatar:
         "https://bloggioitre.net/wp-content/uploads/2021/06/ngam-gai-xinh-giup-tang-tuoi-tho.jpg",
-      __v: 0,
     },
     likers: ["622ef630170f1abb40af8a2d", "b", "c", "d"],
     comments: [
