@@ -1,4 +1,4 @@
-import { SET_POST, ADD_POST, SET_ALL_USER } from "../contexts/constants";
+import { SET_POST, ADD_POST, SET_ALL_USER, ADD_COMMENT, sortFn } from "../contexts/constants";
 
 export const postReducer = (state, action) => {
   const { payload, type } = action;
@@ -16,16 +16,7 @@ export const postReducer = (state, action) => {
       };
     case ADD_POST:
       // console.log(state.posts, payload);
-      const newPosts = [...state.posts, payload].sort(function (x, y) {
-        if (x.createdAt < y.createdAt) {
-          return 1;
-        }
-        if (x.createdAt > y.createdAt) {
-          return -1;
-        }
-
-        return 0;
-      });
+      const newPosts = [...state.posts, payload].sort(sortFn);
       // console.log(newPosts);
 
       return {
@@ -33,7 +24,13 @@ export const postReducer = (state, action) => {
         posts: newPosts,
         isLoadingPost: false,
       };
-
+    case ADD_COMMENT:
+      const { blogId, comment } = payload;
+      const targetBlog = state.posts.find(post => post._id = blogId);
+      targetBlog.comments = [...targetBlog.comments, comment].sort(sortFn);
+      return {
+        ...state,
+      }
     default:
       throw new Error("Not found action!");
   }
