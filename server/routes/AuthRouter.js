@@ -40,12 +40,12 @@ router.get("/", verifyToken, async (req, res) => {
 router.post("/register", async (req, res) => {
   const { email, username, password } = req.body;
   if (!email || !username || !password) {
-    res.json({ success: false, message: "please fill in the fields!" });
+    return res.json({ success: false, message: "please fill in the fields!" });
   }
   try {
     const foundUser = await User.findOne({ username });
     if (foundUser) {
-      res.status(400).json({ success: false, message: "choose another name" });
+      return res.status(400).json({ success: false, message: "choose another name" });
     }
 
     // const validateEmail = (email) => {
@@ -85,6 +85,7 @@ router.post("/register", async (req, res) => {
       { id: newUser._id },
       process.env.SECRET_TOKEN
     );
+    return 
     res
       .status(200)
       .json({ success: true, accessToken, message: "Register success!" });
@@ -97,19 +98,19 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    res.json({ success: false, message: "please fill in the fields!" });
+    return res.json({ success: false, message: "please fill in the fields!" });
   }
   try {
     const foundUser = await User.findOne({ username });
     if (!foundUser) {
-      res
+      return res
         .status(400)
         .json({ success: false, message: "username or password is not exact" });
     }
 
     const verifyPassword = bcrypt.compareSync(password, foundUser.password);
     if (!verifyPassword) {
-      res
+      return res
         .status(400)
         .json({ success: false, message: "username or password is not exact" });
     }

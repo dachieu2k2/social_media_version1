@@ -1,11 +1,11 @@
-const Post = require('../models/PostModel');
-const fs = require('fs');
-const express = require('express');
-const verifyToken = require('../middleware/verifyToken');
-const router = express.Router();
-const multer = require('multer');
-const User = require('../models/UserModel');
-const upload = multer({ dest: './uploads' });
+const Post = require('../models/PostModel')
+const fs = require('fs')
+const express = require('express')
+const verifyToken = require('../middleware/verifyToken')
+const router = express.Router()
+const multer = require('multer')
+const User = require('../models/UserModel')
+const upload = multer({ dest: './uploads' })
 
 router.post(
   '/',
@@ -15,12 +15,12 @@ router.post(
   ]),
   verifyToken,
   async (req, res) => {
-    const fileType = req.files['post'][0].mimetype.split('/')[1];
-    const newFileName = req.files['post'][0].filename + '.' + fileType;
+    const fileType = req.files['post'][0].mimetype.split('/')[1]
+    const newFileName = req.files['post'][0].filename + '.' + fileType
     fs.renameSync(
       `./uploads/${req.files['post'][0].filename}`,
       `./uploads/${newFileName}`
-    );
+    )
 
     try {
       const data = fs.readFileSync(
@@ -29,11 +29,11 @@ router.post(
           encoding: 'utf8',
           flag: 'r',
         }
-      );
+      )
       //   const data = ${req.files["document"][0]
       // console.log(data);
-      const json = JSON.parse(data);
-      const { title, description } = json;
+      const json = JSON.parse(data)
+      const { title, description } = json
       const newPost = new Post({
         title,
         description,
@@ -41,37 +41,53 @@ router.post(
         user: req.userId,
         likers: [],
         comments: [],
-      });
+      })
 
-      await newPost.save();
-      await newPost.populate('user', ['username', 'avatar', 'email', '_id']);
+      await newPost.save()
+      await newPost.populate('user', ['username', 'avatar', 'email', '_id'])
       //   const userInfo = await User.findById(req.userId).select("-password");
 
       res
         .status(200)
-        .json({ success: true, message: 'create post success!', newPost });
+        .json({ success: true, message: 'create post success!', newPost })
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({ success: false, message: 'Server error!' });
+      console.log(error.message)
+      res.status(500).json({ success: false, message: 'Server error!' })
     }
   }
-);
+)
 
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const posts = await Post.find({})
+    let posts = await Post.find({})
       .sort({ createdAt: -1 })
       .limit(20)
-      .populate('user', ['username', 'avatar', 'email', '_id']);
+      .populate('user', ['username', 'avatar', 'email', '_id'])
+
+    posts = posts.map(async (post) => {
+      comments = await Promise.all(
+        post.comments.map(async (comment) => {
+          const user = await User.findById(comment.commenterId).select(
+            'username avatar'
+          )
+          return Object.assign(comment.toObject(), { commenter: user, _id: comment._id })
+        })
+      )
+      return Object.assign(post.toObject(), { comments })
+    })
 
     res
       .status(200)
-      .json({ success: true, message: 'get post success!', posts });
+      .json({
+        success: true,
+        message: 'get post success!',
+        posts: await Promise.all(posts),
+      })
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ success: false, message: 'Server error!' });
+    console.log(error.message)
+    res.status(500).json({ success: false, message: 'Server error!' })
   }
-});
+})
 
 // router.get("/:id", verifyToken, async (req, res) => {
 //   try {
@@ -91,24 +107,24 @@ router.get('/', verifyToken, async (req, res) => {
 
 router.post('/:postId/', verifyToken, async (req, res) => {
   try {
-    const { postId } = req.params;
-    const { comment } = req.body;
-    const commenterId = req.userId;
-    const newComment = { comment, commenterId };
+    const { postId } = req.params
+    const { comment } = req.body
+    const commenterId = req.userId
+    const newComment = { comment, commenterId }
     await Post.findByIdAndUpdate(postId, {
       $push: { comments: newComment },
-    });
-    const user = await User.findById(commenterId).select("username avatar");
+    })
+    const user = await User.findById(commenterId).select('username avatar')
     res.json({
       success: true,
-      comment: {...newComment, user},
-    });
+      comment: { ...newComment, commenter: user },
+    })
   } catch (e) {
     res.json({
       success: false,
       comment: null,
-    });
+    })
   }
-});
+})
 
-module.exports = router;
+module.exports = router

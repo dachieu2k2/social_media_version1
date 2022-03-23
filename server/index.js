@@ -15,7 +15,7 @@ const connectDB = async () => {
     );
     console.log("connected DB");
   } catch (error) {
-    console.log(error.message);
+    console.log("Connect DB Fail!");
     process.exit(-1);
   }
 };
@@ -55,7 +55,6 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("connected to socket.io", socket.id);
   socket.on("global_post", (data) => {
-    // console.log("global_post");
     io.sockets.emit("receive_global_post", data);
   });
   socket.on("disconnect", () => {
