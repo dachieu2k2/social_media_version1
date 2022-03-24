@@ -15,7 +15,7 @@ const Comment = ({ comment, commenter, createdAt }) => {
             alt="avatarhere"
           />
           <div className="blog__title-container-name">
-            <h4 className="blog__title-name">{commenter.username}</h4>
+            <h4 className="blog__title-name">{commenter?.username}</h4>
             {comment.length <= 200 ? (
               <>
                 <p className="blog__title-moment">{comment}</p>

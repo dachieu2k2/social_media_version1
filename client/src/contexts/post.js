@@ -2,7 +2,14 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { postReducer } from "../reducers/post";
 import axios from "axios";
 import io from "socket.io-client";
-import { apiUrl, SET_POST, ADD_POST, config, SET_ALL_USER, ADD_COMMENT } from "./constants";
+import {
+  apiUrl,
+  SET_POST,
+  ADD_POST,
+  config,
+  SET_ALL_USER,
+  ADD_COMMENT,
+} from "./constants";
 import { UserContext } from "./user";
 
 let socket;
@@ -104,22 +111,26 @@ const PostContextProvider = ({ children }) => {
   };
   const createComment = async (data, blogId) => {
     try {
-      const response = await axios.post(`${apiUrl}/post/${blogId}`, data,config());
+      const response = await axios.post(
+        `${apiUrl}/post/${blogId}`,
+        data,
+        config()
+      );
       if (response.data.success) {
         const newComment = response.data.comment;
-        console.log("tao comment", newComment)
+        console.log("tao comment", newComment);
         socket.emit("global_post", {
           type: ADD_COMMENT,
           payload: {
             blogId,
             comment: newComment,
-          }
+          },
         });
       }
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const dataPostContext = {
     posts: postState.posts,
@@ -127,7 +138,7 @@ const PostContextProvider = ({ children }) => {
     getPost,
     users: postState.users,
     isLoadingPost: postState.isLoadingPost,
-    createComment
+    createComment,
   };
   return (
     <PostContext.Provider value={dataPostContext}>

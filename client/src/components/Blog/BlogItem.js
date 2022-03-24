@@ -15,7 +15,7 @@ const BlogItem = ({
   createdAt,
   likers,
   comments,
-  blogId
+  blogId,
 }) => {
   //Context user
   const { userInfo } = useContext(UserContext);
@@ -24,16 +24,19 @@ const BlogItem = ({
   //state
   const [seeMore, setSeeMore] = useState(true);
   const [seeMoreComment, setSeeMoreComment] = useState(2);
-  const [commentValue, setCommentValue] = useState('');
+  const [commentValue, setCommentValue] = useState("");
 
   const handleCreateComment = async () => {
     if (commentValue) {
-      await createComment({
-        comment: commentValue,
-      }, blogId);
-      setCommentValue('');
+      await createComment(
+        {
+          comment: commentValue,
+        },
+        blogId
+      );
+      setCommentValue("");
     }
-  }
+  };
 
   return (
     <div className="item__blog__container">
@@ -69,7 +72,9 @@ const BlogItem = ({
         )}
       </div>
       <div className="blog__body">
-        <img className="blog__body-image" src={image} alt="notTHing" />
+        {image && (
+          <img className="blog__body-image" src={image} alt="notTHing" />
+        )}
       </div>
       <div className="blog__footer">
         <div className="blog__footer-like">
@@ -102,7 +107,7 @@ const BlogItem = ({
           className="see-more-comment"
           onClick={() => setSeeMoreComment(comments.length)}
         >
-          See More Comment
+          {seeMoreComment !== comments.length && "See More Comment"}
         </div>
       )}
       <div className="blog__footer-createComment">
@@ -117,11 +122,14 @@ const BlogItem = ({
             placeholder="write a comment..."
             value={commentValue}
             onChange={(e) => setCommentValue(e.target.value)}
-            onKeyUp={(e) => e.keyCode === 13 && handleCreateComment() }
+            onKeyUp={(e) => e.keyCode === 13 && handleCreateComment()}
           />
         </div>
         <span>
-          <AiOutlineSend className="blog__footer-like-icon" onClick={handleCreateComment} />
+          <AiOutlineSend
+            className="blog__footer-like-icon"
+            onClick={handleCreateComment}
+          />
         </span>
       </div>
     </div>
