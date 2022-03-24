@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./BlogItem.css";
 import { GoHeart, GoComment } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
@@ -19,12 +19,19 @@ const BlogItem = ({
 }) => {
   //Context user
   const { userInfo } = useContext(UserContext);
-  const { createComment } = useContext(PostContext);
+  const { createComment, likePost, unlikePost } = useContext(PostContext);
 
   //state
   const [seeMore, setSeeMore] = useState(true);
   const [seeMoreComment, setSeeMoreComment] = useState(2);
   const [commentValue, setCommentValue] = useState("");
+
+  // use Effect
+  useEffect(() => {
+    if (seeMoreComment !== 2) {
+      setSeeMoreComment(comments.length);
+    }
+  }, [comments.length]);
 
   const handleCreateComment = async () => {
     if (commentValue) {
@@ -35,6 +42,20 @@ const BlogItem = ({
         blogId
       );
       setCommentValue("");
+    }
+  };
+  const hanleLikePost = async () => {
+    try {
+      await likePost(blogId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const hanleUnLikePost = async () => {
+    try {
+      await unlikePost(blogId);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -71,7 +92,14 @@ const BlogItem = ({
           </>
         )}
       </div>
-      <div className="blog__body">
+      <div
+        className="blog__body"
+        onDoubleClick={
+          likers.find((like) => like === userInfo._id)
+            ? () => {}
+            : hanleLikePost
+        }
+      >
         {image && (
           <img className="blog__body-image" src={image} alt="notTHing" />
         )}
@@ -79,9 +107,15 @@ const BlogItem = ({
       <div className="blog__footer">
         <div className="blog__footer-like">
           {likers.find((like) => like === userInfo._id) ? (
-            <GoHeart className="blog__footer-like-icon" />
+            <GoHeart
+              className="blog__footer-like-icon"
+              onClick={hanleUnLikePost}
+            />
           ) : (
-            <AiOutlineHeart className="blog__footer-like-icon" />
+            <AiOutlineHeart
+              className="blog__footer-like-icon"
+              onClick={hanleLikePost}
+            />
           )}
           <span className="blog__footer-like-amount">{likers.length}</span>
         </div>

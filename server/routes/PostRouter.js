@@ -133,4 +133,38 @@ router.post("/:postId/", verifyToken, async (req, res) => {
   }
 });
 
+router.patch("/like/:postId", verifyToken, async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const newLikePost = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $addToSet: { likers: req.userId },
+      },
+      { new: true }
+    );
+    res.status(200).json({ newLikePost, success: true });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "Server error!" });
+  }
+});
+
+router.patch("/un-like/:postId", verifyToken, async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const newUnLikePost = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $pull: { likers: req.userId },
+      },
+      { new: true }
+    );
+    res.status(200).json({ newUnLikePost, success: true });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "Server error!" });
+  }
+});
+
 module.exports = router;

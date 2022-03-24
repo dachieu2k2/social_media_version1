@@ -14,7 +14,7 @@ export const config = () => {
   };
 };
 
-export const sortFn = function(x, y) {
+export const sortFn = function (x, y) {
   if (x.createdAt < y.createdAt) {
     return 1;
   }
@@ -32,3 +32,6 @@ export const SET_POST = "SET_POST";
 export const ADD_POST = "ADD_POST";
 export const SET_ALL_USER = "SET_ALL_USER";
 export const ADD_COMMENT = "ADD_COMMENT";
+
+export const LIKE_POST = "LIKE_POST";
+export const UNLIKE_POST = "UNLIKE_POST";

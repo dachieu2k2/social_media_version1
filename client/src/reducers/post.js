@@ -4,6 +4,8 @@ import {
   SET_ALL_USER,
   ADD_COMMENT,
   sortFn,
+  LIKE_POST,
+  UNLIKE_POST,
 } from "../contexts/constants";
 
 const postReducer = (state, action) => {
@@ -32,7 +34,7 @@ const postReducer = (state, action) => {
       };
     case ADD_COMMENT:
       const { blogId, comment } = payload;
-      const posts = state.posts
+      let posts = state.posts
         .map((post) =>
           post._id === blogId
             ? { ...post, comments: [...post.comments, comment] }
@@ -42,6 +44,28 @@ const postReducer = (state, action) => {
       return {
         ...state,
         posts,
+      };
+    case LIKE_POST:
+      const { postId, newLikePost } = payload;
+      const likeposts = state.posts
+        .map((post) =>
+          post._id === postId ? { ...post, likers: newLikePost } : post
+        )
+        .sort(sortFn);
+      return {
+        ...state,
+        posts: likeposts,
+      };
+    case UNLIKE_POST:
+      const { postIdunlike, newUnLikePost } = payload;
+      const unlikeposts = state.posts
+        .map((post) =>
+          post._id === postIdunlike ? { ...post, likers: newUnLikePost } : post
+        )
+        .sort(sortFn);
+      return {
+        ...state,
+        posts: unlikeposts,
       };
     default:
       throw new Error("Not found action!");

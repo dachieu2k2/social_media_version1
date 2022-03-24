@@ -9,6 +9,8 @@ import {
   config,
   SET_ALL_USER,
   ADD_COMMENT,
+  LIKE_POST,
+  UNLIKE_POST,
 } from "./constants";
 import { UserContext } from "./user";
 
@@ -130,6 +132,54 @@ const PostContextProvider = ({ children }) => {
     }
   };
 
+  const likePost = async (blogId) => {
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/post/like/${blogId}`,
+        {},
+        config()
+      );
+      if (response.data.success) {
+        socket.emit("global_post", {
+          type: LIKE_POST,
+          payload: {
+            postId: blogId,
+            newLikePost: response.data.newLikePost.likers,
+          },
+        });
+      }
+    } catch (error) {
+      if (error.response.data) {
+        console.log(error.response.data);
+      }
+      console.log({ success: false, message: error.message });
+    }
+  };
+
+  const unlikePost = async (blogId) => {
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/post/un-like/${blogId}`,
+        {},
+        config()
+      );
+      if (response.data.success) {
+        socket.emit("global_post", {
+          type: UNLIKE_POST,
+          payload: {
+            postIdunlike: blogId,
+            newUnLikePost: response.data.newUnLikePost.likers,
+          },
+        });
+      }
+    } catch (error) {
+      if (error.response.data) {
+        console.log(error.response.data);
+      }
+      console.log({ success: false, message: error.message });
+    }
+  };
+
   const dataPostContext = {
     posts: postState.posts,
     createPost,
@@ -137,6 +187,8 @@ const PostContextProvider = ({ children }) => {
     users: postState.users,
     isLoadingPost: postState.isLoadingPost,
     createComment,
+    likePost,
+    unlikePost,
   };
   return (
     <PostContext.Provider value={dataPostContext}>
