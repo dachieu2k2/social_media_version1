@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { postReducer } from "../reducers/post";
+import postReducer from "../reducers/post";
 import axios from "axios";
 import io from "socket.io-client";
 import {
@@ -12,8 +12,8 @@ import {
 } from "./constants";
 import { UserContext } from "./user";
 
-let socket;
 const PORT = "http://localhost:4000/";
+const socket = io(PORT);
 // const PORT = "https://project-social-media-app-v1.herokuapp.com/";
 export const PostContext = createContext();
 
@@ -27,14 +27,14 @@ const PostContextProvider = ({ children }) => {
     posts: [],
     users: [],
   });
+
   useEffect(() => {
-    socket = io(PORT);
-    // console.log(socket);
-  }, []);
+    console.log(postState.posts);
+  }, [postState]);
+
   useEffect(() => {
     socket.on("receive_global_post", (data) => {
       dispatch(data, postState);
-      console.log("tai sao m chay 2lan");
     });
   }, []);
   useEffect(() => {
@@ -117,13 +117,11 @@ const PostContextProvider = ({ children }) => {
         config()
       );
       if (response.data.success) {
-        const newComment = response.data.comment;
-        console.log("tao comment", newComment);
         socket.emit("global_post", {
           type: ADD_COMMENT,
           payload: {
             blogId,
-            comment: newComment,
+            comment: response.data.comment,
           },
         });
       }

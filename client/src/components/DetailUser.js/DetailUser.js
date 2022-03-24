@@ -22,6 +22,8 @@ const DetailUser = () => {
                 title={blog.title}
                 user={blog.user}
                 createdAt={blog.createdAt}
+                likers={blog.likers}
+                comments={blog.comments}
               />
             );
           })}

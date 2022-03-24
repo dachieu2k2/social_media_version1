@@ -65,14 +65,31 @@ router.post(
 
 router.get("/", verifyToken, async (req, res) => {
   try {
-    const posts = await Post.find({})
+    let posts = await Post.find({})
       .sort({ createdAt: -1 })
       .limit(20)
       .populate("user", ["username", "avatar", "email", "_id"]);
 
-    res
-      .status(200)
-      .json({ success: true, message: "get post success!", posts });
+    posts = posts.map(async (post) => {
+      comments = await Promise.all(
+        post.comments.map(async (comment) => {
+          const user = await User.findById(comment.commenterId).select(
+            "username avatar"
+          );
+          return Object.assign(comment.toObject(), {
+            commenter: user,
+            _id: comment._id,
+          });
+        })
+      );
+      return Object.assign(post.toObject(), { comments });
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "get post success!",
+      posts: await Promise.all(posts),
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: "Server error!" });
@@ -107,7 +124,7 @@ router.post("/:postId/", verifyToken, async (req, res) => {
     const user = await User.findById(commenterId).select("username avatar");
     res.json({
       success: true,
-      comment: { ...newComment, user },
+      comment: { ...newComment, commenter: user },
     });
   } catch (e) {
     res.json({

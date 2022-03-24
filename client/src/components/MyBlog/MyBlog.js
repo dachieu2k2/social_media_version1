@@ -66,6 +66,8 @@ const MyBlog = () => {
                 title={blog.title}
                 user={blog.user}
                 createdAt={blog.createdAt}
+                likers={blog.likers}
+                comments={blog.comments}
               />
             );
           })}

@@ -6,7 +6,7 @@ import {
   sortFn,
 } from "../contexts/constants";
 
-export const postReducer = (state, action) => {
+const postReducer = (state, action) => {
   const { payload, type } = action;
   switch (type) {
     case SET_ALL_USER:
@@ -32,13 +32,32 @@ export const postReducer = (state, action) => {
       };
     case ADD_COMMENT:
       const { blogId, comment } = payload;
-      const targetBlog = state.posts.find((post) => (post._id = blogId));
-      targetBlog.comments = [...targetBlog.comments, comment].sort(sortFn);
-      console.log(targetBlog.comments);
+      const posts = state.posts
+        .map((post) =>
+          post._id === blogId
+            ? { ...post, comments: [...post.comments, comment] }
+            : post
+        )
+        .sort(sortFn);
       return {
         ...state,
+        posts,
       };
     default:
       throw new Error("Not found action!");
   }
 };
+
+function logger(reducer) {
+  return (state, action) => {
+    const newState = reducer(state, action);
+    // console.group(action.type)
+    // console.log(state)
+    // console.log(action.type)
+    // console.log(newState)
+    // console.groupEnd()
+    return newState;
+  };
+}
+
+export default logger(postReducer);
