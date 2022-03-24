@@ -30,9 +30,9 @@ const PostContextProvider = ({ children }) => {
     users: [],
   });
 
-  useEffect(() => {
-    console.log(postState.posts);
-  }, [postState]);
+  // useEffect(() => {
+  //   console.log(postState.posts);
+  // }, [postState]);
 
   useEffect(() => {
     socket.on("receive_global_post", (data) => {
