@@ -15,9 +15,11 @@ router.post(
   ]),
   verifyToken,
   async (req, res) => {
-    if (req.files.length === 2) {
-      const fileType = req.files["post"][0].mimetype.split("/")[1];
-      const newFileName = req.files["post"][0].filename + "." + fileType;
+    let newFileName;
+    if (req.files.post) {
+      console.log();
+      const fileType = req.files["post"][0]?.mimetype.split("/")[1];
+      newFileName = req.files["post"][0].filename + "." + fileType;
       fs.renameSync(
         `./uploads/${req.files["post"][0].filename}`,
         `./uploads/${newFileName}`
@@ -32,6 +34,7 @@ router.post(
           flag: "r",
         }
       );
+      fs.unlinkSync(`./uploads/${req.files["document"][0].filename}`);
       //   const data = ${req.files["document"][0]
       // console.log(data);
       const json = JSON.parse(data);
@@ -39,10 +42,7 @@ router.post(
       const newPost = new Post({
         title,
         description,
-        image:
-          req.files.length === 2
-            ? process.env.API + "/static/" + newFileName
-            : "",
+        image: req.files.post ? process.env.API + "/static/" + newFileName : "",
         user: req.userId,
         likers: [],
         comments: [],
@@ -50,7 +50,6 @@ router.post(
 
       await newPost.save();
       await newPost.populate("user", ["username", "avatar", "email", "_id"]);
-      fs.unlinkSync(`./uploads/${req.files["document"][0].filename}`);
       //   const userInfo = await User.findById(req.userId).select("-password");
 
       res

@@ -1,6 +1,6 @@
 .list_blog {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     max-width: 50%;
     flex-direction: column;
     align-items: center;
@@ -27,6 +27,7 @@
         max-width: 100%;
         flex: 0 0 100%;
         width: 644px;
+        margin-bottom: 70px;
     }
 }
 @media (min-width:0px) and (max-width: 740px) {
@@ -34,5 +35,7 @@
         max-width: 90%;
         flex: 0 0 90%;
         width: 644px;
+        margin-bottom: 70px;
+
     }
 }
