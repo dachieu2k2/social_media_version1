@@ -31,6 +31,9 @@ const WriteBlog = ({ show, handleClickShow }) => {
       formData.append("post", image);
       formData.append("document", blob);
       // console.log(formData);
+      setImage(null);
+      setDescription("");
+      setTitle("");
       const response = await createPost(formData);
 
       // if (response.success) {
@@ -47,62 +50,70 @@ const WriteBlog = ({ show, handleClickShow }) => {
       {show && (
         <div className="write__blog">
           <div className="write__blog-modal" onClick={handleClickShow}></div>
-          <div className="write__blog-container">
-            <div className="write__blog-icon">
-              <span className="write__blog-button">
-                <GoX className="write__blog-color" onClick={handleClickShow} />
-              </span>
-            </div>
-            <div className="write__blog-control">
-              <div className="write__blog-title">Title</div>
-              <input
-                type="text"
-                className="write__blog-input"
-                placeholder="title..."
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="write__blog-control">
-              <div className="write__blog-title">Description</div>
-              <input
-                type="text"
-                className="write__blog-input"
-                placeholder="Description..."
-                name="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div className="write__blog-control">
-              <div className="write__blog-title">Choose file</div>
-              <input
-                type="file"
-                className="write__blog-file"
-                onChange={onChangeFile}
-              />
-            </div>
-            <div className="write__blog-container-image">
-              {image && (
-                //   <img
-                //   src="https://bloggioitre.net/wp-content/uploads/2021/06/ngam-gai-xinh-giup-tang-tuoi-tho.jpg"
-                //   alt=""
-                //   className="write__blog-img"
-                // />
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt=""
-                  className="write__blog-img"
+          <div className="write__blog-main">
+            <ul className="write__blog-container">
+              <li className="write__blog-icon">
+                <span className="write__blog-button">
+                  <GoX
+                    className="write__blog-color"
+                    onClick={handleClickShow}
+                  />
+                </span>
+              </li>
+              <li className="write__blog-control">
+                <div className="write__blog-title">Title</div>
+                <input
+                  type="text"
+                  className="write__blog-input"
+                  placeholder="title..."
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
-              )}
-            </div>
-            <span
+              </li>
+              <li className="write__blog-control">
+                <div className="write__blog-title">Description</div>
+                <textarea
+                  type="text"
+                  className="write__blog-input"
+                  placeholder="Description..."
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  style={{ resize: "none" }}
+                />
+              </li>
+              <li className="write__blog-control">
+                <div className="write__blog-title">Choose file</div>
+                <input
+                  type="file"
+                  className="write__blog-file"
+                  onChange={onChangeFile}
+                  title=""
+                />
+              </li>
+              <li className="write__blog-container-image">
+                {image && (
+                  //   <img
+                  //   src="https://bloggioitre.net/wp-content/uploads/2021/06/ngam-gai-xinh-giup-tang-tuoi-tho.jpg"
+                  //   alt=""
+                  //   className="write__blog-img"
+                  // />
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt=""
+                    className="write__blog-img"
+                  />
+                )}
+              </li>
+            </ul>
+            <div
               className="write__blog-button-save"
               onClick={handleCreatePost}
+              style={{ zIndex: "3" }}
             >
               Save
-            </span>
+            </div>
           </div>
         </div>
       )}

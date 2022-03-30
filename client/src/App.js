@@ -12,6 +12,7 @@ import MyBlog from "./components/MyBlog/MyBlog";
 import PostContextProvider from "./contexts/post";
 import Search from "./components/Search/Search";
 import DetailUser from "./components/DetailUser.js/DetailUser";
+import Notification from "./components/Notifications/Notification";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />}>
               <Route path="my_blog" element={<MyBlog />} />
+              <Route path="notifications" element={<Notification />} />
 
               <Route path="home" element={<Blog />} />
               <Route path="setting" element={<Setting />} />

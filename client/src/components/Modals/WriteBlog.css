@@ -16,32 +16,47 @@
     right: 0;
     bottom: 0;
     z-index: 1;
+    background: rgb(249 211 217 / 14%);
+}
+.write__blog-main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+
 }
 .write__blog-container {
-    width:44%;
+    width:40%;
+    padding-right: 2px;
     background-color: white;
     z-index: 2;
     display: flex;
-    justify-content: center;
     align-items: center;
     position: relative;
     flex-direction: column;
     border-radius: 10px;
-    
     border: 5px solid pink;
+    overflow-y: overlay;
+    height: 60%;
+    
 }
 .write__blog-icon{
     position: absolute;
-    top: 3%;
-    right: 3%;
+    top: -3%;
+    right: 0%;
     cursor: pointer;
+    padding: 10px 10px;
 }
 .write__blog-color{
     font-size: 1.8rem;
     fill: pink;
 }
 .write__blog-control {
-    width: 60%;
+    margin-top: 5px;
+    width: 90%;
     padding: 10px 10px;
 }
 .write__blog-title {
@@ -64,9 +79,15 @@
     display: flex;
     justify-content: center;
 }
+input[type='file'] {
+    color: rgba(0, 0, 0, 0);
+    outline: none;
+    border: 0px;
+}
 .write__blog-img{
     /* width: 60%; */
-    height: 200px;
+    /* height: 200px; */
+    width: 96%;
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -78,5 +99,69 @@
     cursor: pointer;
     background-color: pink;
     margin: 10px 10px;
+    width: 40%;
+    text-align: center;
+}
+
+span.write-btnbtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 3px solid pink;
+    border-radius: 50%;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+textarea.write__blog-input {
+    height: 200px;
+}
+
+@media (min-width: 1024px) and (max-width: 1239px){
+    .trending__blog-main {
+        width: 216px;
+    }
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .write__blog-container{
+        width: 80%;
+        height: 80%;
+    }
+    .write__blog-control{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .write__blog-button-save{
+        width:80%; 
+    }
+    textarea.write__blog-input {
+        height: 200px;
+    }
+
+
+}
+@media (min-width:0px) and (max-width: 740px) {
     
+    .write__blog-container{
+        width: 100%;
+        height: 100%;
+    }
+    .write__blog-control{
+        width: 100%;
+        margin-top: 20px;
+
+    }
+    .write__blog-button-save{
+        width:100%; 
+    }
+    .write__blog-icon{
+        top: 0%;
+    }
+    textarea.write__blog-input {
+        height: 400px;
+    }
 }

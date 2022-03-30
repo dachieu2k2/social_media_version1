@@ -4,18 +4,17 @@
     margin-top: 30px;
     padding: 10px 40px;
     width: 100%;
+    height: 1000px;
 }
 .trending__blog-main {
     position: fixed;
     width: 280px;
 }
 .trending__blog-main:hover{
-    overflow-y: scroll;
-
+    overflow-y: auto;
 }
 .trending__blog-container{
     border-radius: 10px;
-    
     border: 5px solid pink;
 }
 .trending__blog-list {
@@ -36,10 +35,12 @@
     .trending__blog{
         display: none;
     }
+
 }
 @media (min-width:0px) and (max-width: 740px) {
     
     .trending__blog{
         display: none;
     }
+    
 }
