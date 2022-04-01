@@ -52,6 +52,7 @@ const MyBlog = () => {
   const { posts } = useContext(PostContext);
   //user context
   const { userInfo } = useContext(UserContext);
+
   return (
     <>
       <ul className="list_blog">

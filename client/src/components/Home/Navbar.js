@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Navbar.css";
 import { GoHome, GoSearch, GoPerson, GoGear } from "react-icons/go";
 import { BiBell } from "react-icons/bi";
 import CustomLink from "./CustomLink";
 
+let prePathname;
+
 const Navbar = () => {
   const checkTop = () => {
-    if (window.scrollY !== 0) {
+    let pathname = window.location.pathname;
+    if (prePathname === pathname) {
       window.scrollTo(0, 0);
+      prePathname = null;
     }
+    prePathname = pathname;
   };
 
   return (

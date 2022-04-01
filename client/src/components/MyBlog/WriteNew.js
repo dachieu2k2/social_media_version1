@@ -17,18 +17,15 @@ const WriteNew = ({ handleClickShow }) => {
             alt="avatarhere"
           />
           <li className="write__blog-control write__blog-control-1">
-            <input
-              disabled
-              type="text"
+            <div
               className="write__blog-input write__blog-input--hover"
-              placeholder="Write a new post..."
-              name="description"
               style={{
                 border: "1px solid pink",
-                cursor: "pointer",
                 borderRadius: "50px",
               }}
-            />
+            >
+              Write a new post...
+            </div>
           </li>
         </div>
       </div>
