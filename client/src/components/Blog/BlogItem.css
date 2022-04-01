@@ -2,7 +2,8 @@
     width: 100%;
     margin-top: 20px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    box-shadow: rgb(245, 122, 143,1) 0px 6px 12px -2px, rgba(245, 122, 143,1) 0px 3px 7px -3px;
+    /* box-shadow: rgb(245, 122, 143,1) 0px 6px 12px -2px, rgba(245, 122, 143,1) 0px 3px 7px -3px; */
+    box-shadow: rgb(245 213 219) 0px 6px 12px -2px, rgb(245 122 143) 0px 3px 7px -3px;;
     padding: 10px 10px;
     border-radius: 10px;
 }
@@ -77,4 +78,11 @@ input.blog__footer-wirte {
     border-radius: 13px;
     outline: none;
     border: 1px solid pink;
+}
+
+.write__blog-input--hover{
+    background-color: rgb(255, 244, 246);;
+}
+.write__blog-control:hover .write__blog-input--hover {
+    background: #ffd3da;
 }

@@ -115,6 +115,9 @@ span.write-btnbtn {
     align-items: center;
     cursor: pointer;
 }
+.writenew{
+    display: none;
+}
 textarea.write__blog-input {
     height: 200px;
 }
@@ -122,6 +125,9 @@ textarea.write__blog-input {
 @media (min-width: 1024px) and (max-width: 1239px){
     .trending__blog-main {
         width: 216px;
+    }
+    .writenew{
+        display: none;
     }
 }
 
@@ -135,13 +141,25 @@ textarea.write__blog-input {
         width: 100%;
         margin-top: 20px;
     }
+    .write__blog-control-1{
+        margin-top: 0px;
+
+    }
     .write__blog-button-save{
         width:80%; 
     }
     textarea.write__blog-input {
         height: 200px;
     }
-
+    span.write-btnbtn{
+        bottom: 80px;
+    }
+    .writenew{
+        display: block;
+    }
+    span.write-btnbtn{
+        display: none;
+    }
 
 }
 @media (min-width:0px) and (max-width: 740px) {
@@ -155,6 +173,10 @@ textarea.write__blog-input {
         margin-top: 20px;
 
     }
+    .write__blog-control-1{
+        margin-top: 0px;
+
+    }
     .write__blog-button-save{
         width:100%; 
     }
@@ -163,5 +185,15 @@ textarea.write__blog-input {
     }
     textarea.write__blog-input {
         height: 400px;
+    }
+    
+    span.write-btnbtn{
+        bottom: 80px;
+    }
+    .writenew{
+        display: block;
+    }
+    span.write-btnbtn{
+        display: none;
     }
 }

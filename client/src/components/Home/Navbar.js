@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { GoHome, GoSearch, GoPerson, GoPencil, GoGear } from "react-icons/go";
+import { GoHome, GoSearch, GoPerson, GoGear } from "react-icons/go";
 import { BiBell } from "react-icons/bi";
-import WriteBlog from "../Modals/WriteBlog";
 import CustomLink from "./CustomLink";
 
 const Navbar = () => {
-  const [show, setShow] = useState(false);
-  const handleClickShow = () => {
-    setShow(!show);
+  const checkTop = () => {
+    if (window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
     <div className="navbar">
-      <ul
-        className="main__navbar"
-        onDoubleClick={() => {
-          window.scrollTo(0, 0);
-        }}
-      >
+      <ul className="main__navbar" onClick={checkTop}>
         <CustomLink to="/home">
           <span className="navbar__item-icon">
             <GoHome className="nav__item-color" />
@@ -50,12 +44,6 @@ const Navbar = () => {
           </span>
         </CustomLink>
       </ul>
-      <span className="write-btnbtn">
-        <span className="write-btnbtn-button" onClick={handleClickShow}>
-          <GoPencil className="nav__item-color" />
-        </span>
-      </span>
-      <WriteBlog show={show} handleClickShow={handleClickShow} />
     </div>
   );
 };

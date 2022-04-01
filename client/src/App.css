@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
     color: rgb(22, 22, 22);
+    scroll-behavior: smooth;
 }
 *::selection{
     background-color: pink;

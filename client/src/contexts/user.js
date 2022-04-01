@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SET_USER, SET_AVATAR_USER, apiUrl, config } from "./constants";
 import { userReducer } from "../reducers/user";
+import Loading from "../components/Loading/Loading";
 
 export const UserContext = createContext();
 
@@ -131,11 +132,13 @@ const UserProvider = ({ children }) => {
     logout,
     isLoading: userState.isLoading,
   };
-  return (
+
+  let body = (
     <UserContext.Provider value={userContextData}>
       {children}
     </UserContext.Provider>
   );
+  return <>{body}</>;
 };
 
 export default UserProvider;

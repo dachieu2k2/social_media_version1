@@ -52,6 +52,7 @@
 } */
 
 @media (min-width: 1024px) and (max-width: 1239px){
+    
 }
 
 /* Tablet - PC low resolution */
@@ -73,6 +74,7 @@
         border-top: 5px solid rgb(245,122,143);
         border-right: transparent;
     }
+    
 }
 @media (min-width:0px) and (max-width: 740px) {
     .navbar{
@@ -92,4 +94,5 @@
         border-top: 5px solid rgb(245,122,143);
         border-right: transparent;
     }
+    
 }

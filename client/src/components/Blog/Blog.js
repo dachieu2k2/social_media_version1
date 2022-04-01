@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Blog.css";
 import BlogItem from "./BlogItem";
 import TrendingBlog from "../TrendingBlog/TrendingBlog";
 import Loading from "../Loading/Loading";
 import { PostContext } from "../../contexts/post";
+import WriteNew from "../MyBlog/WriteNew";
+import WriteBlog from "../Modals/WriteBlog";
+import { GoPencil } from "react-icons/go";
 
 const fakeblog = [
   {
@@ -88,7 +91,14 @@ const fakeblog = [
 ];
 
 const Blog = () => {
+  // context
   const { isLoadingPost, posts } = useContext(PostContext);
+
+  // state
+  const [show, setShow] = useState(false);
+  const handleClickShow = () => {
+    setShow(!show);
+  };
   let body;
   if (isLoadingPost) {
     body = <Loading />;
@@ -96,6 +106,7 @@ const Blog = () => {
     body = (
       <>
         <ul className="list_blog">
+          <WriteNew handleClickShow={handleClickShow} />
           {posts.map((blog, index) => {
             return (
               <BlogItem
@@ -113,9 +124,16 @@ const Blog = () => {
           })}
         </ul>
         <TrendingBlog />
+        <span className="write-btnbtn">
+          <span className="write-btnbtn-button" onClick={handleClickShow}>
+            <GoPencil className="nav__item-color" />
+          </span>
+        </span>
+        <WriteBlog show={show} handleClickShow={handleClickShow} />
       </>
     );
   }
+
   return body;
 };
 
