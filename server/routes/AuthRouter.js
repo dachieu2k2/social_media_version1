@@ -45,33 +45,35 @@ router.post("/register", async (req, res) => {
   try {
     const foundUser = await User.findOne({ username });
     if (foundUser) {
-      return res.status(400).json({ success: false, message: "choose another name" });
+      return res
+        .status(400)
+        .json({ success: false, message: "choose another name" });
     }
 
-    // const validateEmail = (email) => {
-    //   return String(email)
-    //     .toLowerCase()
-    //     .match(
-    //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    //     );
-    // };
-    // if (!validateEmail(email)) {
-    //   res.json({ success: false, message: "this is not email" });
-    // }
-    // const FoundEmail = await User.findOne({ email });
-    // if (FoundEmail) {
-    //   res.json({
-    //     success: false,
-    //     message: "Please choose another email",
-    //   });
-    // }
-    // if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
-    //   res.json({
-    //     success: false,
-    //     message:
-    //       "Password should contains at least 8 from the mentioned characters, one upper case, one lower case, one digit",
-    //   });
-    // }
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+    if (!validateEmail(email)) {
+      res.json({ success: false, message: "this is not email" });
+    }
+    const FoundEmail = await User.findOne({ email });
+    if (FoundEmail) {
+      res.json({
+        success: false,
+        message: "Please choose another email",
+      });
+    }
+    if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)) {
+      res.json({
+        success: false,
+        message:
+          "Password should contains at least 8 from the mentioned characters, one upper case, one lower case, one digit",
+      });
+    }
     const hashPassword = bcrypt.hashSync(password, 10);
     const newUser = new User({
       username,
@@ -85,7 +87,7 @@ router.post("/register", async (req, res) => {
       { id: newUser._id },
       process.env.SECRET_TOKEN
     );
-    return 
+    return;
     res
       .status(200)
       .json({ success: true, accessToken, message: "Register success!" });

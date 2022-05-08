@@ -25,9 +25,9 @@ const Navbar = () => {
           </span>
         </CustomLink>
 
-        <CustomLink to="/notifications">
+        <CustomLink to="/search">
           <span className="navbar__item-icon">
-            <BiBell className="nav__item-color" />
+            <GoSearch className="nav__item-color" />
           </span>
         </CustomLink>
 
@@ -37,9 +37,9 @@ const Navbar = () => {
           </span>
         </CustomLink>
 
-        <CustomLink to="/search">
+        <CustomLink to="/notifications">
           <span className="navbar__item-icon">
-            <GoSearch className="nav__item-color" />
+            <BiBell className="nav__item-color" />
           </span>
         </CustomLink>
 

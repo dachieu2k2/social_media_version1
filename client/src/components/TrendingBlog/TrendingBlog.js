@@ -3,15 +3,15 @@ import "./TrendingBlog.css";
 import TrendingBlogItem from "./TrendingBlogItem";
 const fakeListTrending = [
   {
-    title: "gaixinh",
+    title: "news",
     amount: 2,
   },
   {
-    title: "gaicucngon",
+    title: "gaixinh",
     amount: 22,
   },
   {
-    title: "gai re",
+    title: "superidol",
     amount: 0,
   },
 ];
@@ -36,7 +36,7 @@ const TrendingBlog = () => {
           </div>
         </div>
         <div className="trending__blog-container" style={{ marginTop: "30px" }}>
-          <h3 className="blog__item_typo">Trend for you</h3>
+          <h3 className="blog__item_typo">News for you</h3>
 
           <div className="trending__blog-list">
             {fakeListTrending.map((item, index) => {
