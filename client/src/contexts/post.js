@@ -14,8 +14,10 @@ import {
 } from "./constants";
 import { UserContext } from "./user";
 
-const PORT = "http://localhost:4000/";
-const socket = io(PORT);
+const PORT = "https://project-social-media-app-v1.herokuapp.com/";
+const socket = io(PORT, {
+  transports: ["websocket"],
+});
 // const PORT = "https://project-social-media-app-v1.herokuapp.com/";
 export const PostContext = createContext();
 
