@@ -27,7 +27,7 @@ app.use(cors());
 app.use("/static", express.static("./uploads"));
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("hello world 2");
 });
 
 app.use("/api/users", AuthRouter);
@@ -48,7 +48,7 @@ const server = app.listen(PORT, console.log(`App start on port ${PORT}`));
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.APISERVER,
   },
 });
 

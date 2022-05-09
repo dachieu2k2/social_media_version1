@@ -1,7 +1,7 @@
 export const apiUrl =
   process.env.NODE_ENV !== "production"
-    ? "https://project-social-media-app-v1.herokuapp.com/api"
-    : "http://localhost:4000/api";
+    ? "http://localhost:4000/api"
+    : "https://project-social-media-app-v1.herokuapp.com/api";
 
 // export const apiUrl = "https://project-social-media-app-v1.herokuapp.com/api";
 export const accessToken = localStorage.getItem("accessToken");
