@@ -1,7 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./BlogItem.css";
-import { GoHeart, GoComment } from "react-icons/go";
-import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
+import { GoHeart, GoComment, GoKebabVertical } from "react-icons/go";
+import {
+  AiOutlineHeart,
+  AiOutlineSend,
+  AiOutlineDelete,
+  AiOutlineMore,
+  AiOutlineEdit,
+} from "react-icons/ai";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import Comment from "./Comment";
 import { UserContext } from "../../contexts/user";
@@ -25,7 +32,7 @@ const BlogItem = ({
   const [seeMore, setSeeMore] = useState(true);
   const [seeMoreComment, setSeeMoreComment] = useState(2);
   const [commentValue, setCommentValue] = useState("");
-
+  const [showfunction, setShowfunction] = useState("");
   // use Effect
   useEffect(() => {
     if (seeMoreComment !== 2) {
@@ -58,21 +65,73 @@ const BlogItem = ({
       console.log(error);
     }
   };
+  const hanleShowFunction = (blogId) => {
+    if (showfunction === "") {
+      setShowfunction(blogId);
+    } else if (showfunction === blogId) {
+      setShowfunction("");
+    } else {
+      setShowfunction(blogId);
+    }
+  };
 
   return (
     <div className="item__blog__container">
       <div className="blog__title">
         <div className="blog__title-personal">
-          <img
-            className="blog__title-avatar"
-            src={user.avatar}
-            alt="avatarhere"
-          />
-          <div className="blog__title-container-name">
-            <h4 className="blog__title-name">{user.username}</h4>
-            <p className="blog__title-moment">
-              {moment(createdAt).startOf("second").fromNow()}
-            </p>
+          <div style={{ display: "flex", width: "100%" }}>
+            <img
+              className="blog__title-avatar"
+              src={user.avatar}
+              alt="avatarhere"
+            />
+            <div className="blog__title-container-name">
+              <h4 className="blog__title-name">
+                <Link to={"/" + user._id}>{user.username}</Link>
+              </h4>
+              <p className="blog__title-moment">
+                {moment(createdAt).startOf("second").fromNow()}
+              </p>
+            </div>
+          </div>
+          <div style={{ position: "relative" }}>
+            <AiOutlineMore
+              className="blog__footer-like-icon"
+              onClick={() => hanleShowFunction(blogId)}
+            />
+            {showfunction === "" && showfunction !== blogId ? (
+              ""
+            ) : (
+              <div
+                style={{
+                  width: "200px",
+                  backgroundColor: "white",
+                  position: "absolute",
+                  right: "100%",
+                  borderRadius: "5px",
+                  boxShadow:
+                    "rgb(245 213 219) 0px 6px 12px -2px, rgb(245 122 143) 0px 3px 7px -3px",
+                }}
+              >
+                <div className="function_edit">
+                  <AiOutlineHeart className="blog__footer-like-icon" />
+                  <p style={{ paddingLeft: "10px" }}>View</p>
+                </div>
+
+                {userInfo._id === user._id && (
+                  <>
+                    <div className="function_edit">
+                      <AiOutlineEdit className="blog__footer-like-icon" />
+                      <p style={{ paddingLeft: "10px" }}>Edit</p>
+                    </div>
+                    <div className="function_edit">
+                      <AiOutlineDelete className="blog__footer-like-icon" />
+                      <p style={{ paddingLeft: "10px" }}>Delete</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

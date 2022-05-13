@@ -113,6 +113,14 @@ const PostContextProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+
+  const deletePost = async () => {
+    try {
+      const response = await axios.delete(`${apiUrl}/post`, config());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const createComment = async (data, blogId) => {
     try {
       const response = await axios.post(

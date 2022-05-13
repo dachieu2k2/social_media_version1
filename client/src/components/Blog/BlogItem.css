@@ -86,3 +86,9 @@ input.blog__footer-wirte {
 .write__blog-control:hover .write__blog-input--hover {
     background: #ffd3da;
 }
+.function_edit{
+    display: flex;
+    border-bottom: 1px solid pink;
+    padding:10px;
+    align-items: center;
+}
