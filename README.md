@@ -2,10 +2,24 @@
 
 - Where you can share your image or status for every one
 
+##### Home page
+
 ![Template Screenshot](homepage.png "Template Screenshot")
+
+##### Search page
+
 ![Template Screenshot](searchpage.png "Template Screenshot")
+
+##### Your page
+
 ![Template Screenshot](personalpage.png "Template Screenshot")
+
+##### Notification page
+
 ![Template Screenshot](notificationpage.png "Template Screenshot")
+
+##### Setting page
+
 ![Template Screenshot](settingpage.png "Template Screenshot")
 
 ## Live demo
